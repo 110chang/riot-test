@@ -43,9 +43,7 @@
 
     this.mixin(ClockMixin);
 
-    test() {
-      
-    }
+    //test() {}
 
     function clock() { 
       var t = moment();
