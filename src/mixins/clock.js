@@ -12,11 +12,21 @@ var ClockMixin = {
     this.on('mount', function() {
       console.log(this.opts);
     });
+    this.on('update', function() {
+      // always fire when DOM event is fired
+      console.log('update!');
+    });
     this.parent.one('clockTick', this.wakeup);
     this.parent.on('clockTick', this.draw);
   },
   test: function(e) {
     console.log(this.opts);
+  },
+  pause: function(e) {
+    this.parent.off('clockTick', this.draw);
+  },
+  resume: function(e) {
+    this.parent.on('clockTick', this.draw);
   },
   wakeup: function() {
     this.isShow = true;
