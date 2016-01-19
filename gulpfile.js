@@ -7,20 +7,13 @@ var browsersync = require("browser-sync");
 gulp.task('concat', function () {
   return browserify({
     debug: true,
-    // this is an array of all entry points
-    // where Browserify starts to look for
-    // dependencies
-    entries: ['./src/main.js'],
-    // list of transforms that are supported
-    // riotify needs .tag file name extension
-    // to support tag compilation
-    transform: [riotify]
-    //transform: [riotify, { template: 'jade' }]
-  }).bundle()
-  // take the end result and place it to dist folder
-  .pipe(source('main.bundle.js'))
-  .pipe(gulp.dest('./dest/'))
-  .pipe(browsersync.stream());
+    entries: ['./src/main.js']
+  }).transform([riotify])
+    .bundle()
+    // take the end result and place it to dist folder
+    .pipe(source('main.bundle.js'))
+    .pipe(gulp.dest('./dest/'))
+    .pipe(browsersync.stream());
 });
 
 gulp.task('server', function () {
